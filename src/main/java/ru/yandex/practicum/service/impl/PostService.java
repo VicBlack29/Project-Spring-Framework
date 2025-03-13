@@ -6,9 +6,10 @@ import ru.yandex.practicum.model.dao.api.IEntityDao;
 import ru.yandex.practicum.model.entity.Comment;
 import ru.yandex.practicum.model.entity.Post;
 import ru.yandex.practicum.repository.api.IPostRepository;
+import ru.yandex.practicum.service.api.IPostService;
 
 @Service
-public class PostService {
+public class PostService implements IPostService {
 
     private IEntityDao<Post> postDao;
     private IEntityDao<Comment> commentDao;
