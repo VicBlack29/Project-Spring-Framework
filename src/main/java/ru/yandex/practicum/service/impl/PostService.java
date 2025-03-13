@@ -8,6 +8,8 @@ import ru.yandex.practicum.model.entity.Post;
 import ru.yandex.practicum.repository.api.IPostRepository;
 import ru.yandex.practicum.service.api.IPostService;
 
+import java.util.List;
+
 @Service
 public class PostService implements IPostService {
 
@@ -20,6 +22,11 @@ public class PostService implements IPostService {
         this.postDao = postDao;
         this.commentDao = commentDao;
         this.postRepository = postRepository;
+    }
+
+    @Override
+    public List<Post> getAll() {
+        return postDao.getAll();
     }
 
 }

@@ -5,6 +5,10 @@ public class Comment {
     private Long id;
     private String text;
 
+    public Comment() {
+
+    }
+
     public Comment(Long id, String text) {
         this.id = id;
         this.text = text;

@@ -9,14 +9,20 @@ public class Post {
     private String imagePath;
     private Integer likesCount;
     private List<Comment> comments;
+    private String tags;
 
-    public Post(Long id, String title, String text, String imagePath, Integer likesCount, List<Comment> comments) {
+    public Post() {
+
+    }
+
+    public Post(Long id, String title, String text, String imagePath, Integer likesCount, List<Comment> comments, String tags) {
         this.id = id;
         this.title = title;
         this.text = text;
         this.imagePath = imagePath;
         this.likesCount = likesCount;
         this.comments = comments;
+        this.tags = tags;
     }
 
     public Long getId() {
@@ -65,5 +71,13 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

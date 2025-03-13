@@ -1,6 +1,7 @@
 package ru.yandex.practicum.model.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.model.dao.api.IEntityDao;
 import ru.yandex.practicum.model.entity.Comment;
@@ -12,16 +13,22 @@ import java.util.Optional;
 @Component
 public class CommentDao implements IEntityDao<Comment> {
 
-    private Connection connection;
+    private JdbcTemplate jdbcTemplate;
 
-//    @Autowired
-//    public CommentDao(Connection connection) {
-//        this.connection = connection;
-//    }
+    @Autowired
+    public CommentDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Comment> getAll() {
-        return List.of();
+        return jdbcTemplate.query(
+                "select id, text from public.comments;",
+                (rs, rowNum) -> new Comment(
+                        rs.getLong("id"),
+                        rs.getString("text")
+                )
+        );
     }
 
     @Override

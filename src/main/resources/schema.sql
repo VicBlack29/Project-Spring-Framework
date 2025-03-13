@@ -13,12 +13,19 @@ create table if not exists posts(
     id bigserial primary key,
     title varchar(256) not null,
     text varchar(256) not null,
-    imagePath varchar(256),
+    image_path varchar(256),
     likes_count integer,
-    comments_id bigserial
+    comments_id bigserial,
+    tags varchar(256)
  );
 
 create table if not exists comments(
    id bigserial primary key,
    text varchar(256) not null
 );
+
+delete from public.posts;
+delete from public.comments;
+
+insert into posts(title, text, image_path, likes_count, tags) values ('Title1', 'Text1', '/path/image1', 0, '1, 2, 3');
+insert into posts(title, text, image_path, likes_count, tags) values ('Title2', 'Text2', '/path/image2', 10, 'one, two, three');
