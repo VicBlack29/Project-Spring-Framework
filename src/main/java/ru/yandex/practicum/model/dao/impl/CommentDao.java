@@ -23,9 +23,10 @@ public class CommentDao implements IEntityDao<Comment> {
     @Override
     public List<Comment> getAll() {
         return jdbcTemplate.query(
-                "select id, text from public.comments;",
+                "select id, post_id, text from public.comments;",
                 (rs, rowNum) -> new Comment(
                         rs.getLong("id"),
+                        rs.getLong("post_id"),
                         rs.getString("text")
                 )
         );

@@ -9,6 +9,7 @@ import ru.yandex.practicum.repository.api.IPostRepository;
 import ru.yandex.practicum.service.api.IPostService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService implements IPostService {
@@ -27,6 +28,11 @@ public class PostService implements IPostService {
     @Override
     public List<Post> getAll() {
         return postDao.getAll();
+    }
+
+    @Override
+    public Post getById(Long id) {
+        return postDao.getById(id).orElse(new Post());
     }
 
 }

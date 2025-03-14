@@ -1,6 +1,7 @@
 package ru.yandex.practicum.model.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.model.dao.api.IEntityDao;
@@ -30,7 +31,13 @@ public class PostDao implements IEntityDao<Post> {
                         rs.getString("text"),
                         rs.getString("image_path"),
                         rs.getInt("likes_count"),
-                        jdbcTemplate.queryForList("select id, text from comments", Comment.class),
+                        jdbcTemplate.query(
+                            String.format(
+                                    "select id, post_id, text from comments where post_id = %d;",
+                                    rs.getLong("id")
+                            ),
+                            new BeanPropertyRowMapper<>(Comment.class)
+                        ),
                         rs.getString("tags")
                 ));
     }
