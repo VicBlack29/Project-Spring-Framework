@@ -1,17 +1,29 @@
+drop table if exists public.posts;
+
 create table if not exists posts(
     id bigserial primary key,
     title varchar(256) not null,
     text varchar(256) not null,
     image_path varchar(256),
-    likes_count integer,
-    comments_id bigserial,
+    likes_count integer default 0,
     tags varchar(256)
  );
+
+drop table if exists public.comments;
 
 create table if not exists comments(
    id bigserial primary key,
    post_id bigserial,
    text varchar(256) not null
+);
+
+drop table if exists public.images;
+
+create table if not exists images(
+    id bigserial primary key,
+    post_id bigserial,
+    image_path varchar(256),
+    byte_content varchar(1024)
 );
 
 delete from public.posts;

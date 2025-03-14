@@ -1,6 +1,7 @@
 package ru.yandex.practicum.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -53,9 +54,15 @@ public class PostController {
         return "add-post";
     }
 
-    @PostMapping("/posts")
-    public String addPost(){
+    @PostMapping(path = "/posts", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public String addPost(@ModelAttribute Post post){
+        postService.save(post);
         return "redirect:/posts/{id}";
+    }
+
+    @GetMapping("/images/{id}")
+    public String getImage(@PathVariable(name = "id") Long id) {
+        return "";
     }
 
 }

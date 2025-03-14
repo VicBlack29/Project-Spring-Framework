@@ -11,6 +11,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 @Configuration
 public class DataSourceConfiguration {
@@ -28,6 +30,11 @@ public class DataSourceConfiguration {
         dataSource.setPassword(password);
 
         return dataSource;
+    }
+
+    @Bean
+    public Connection connection(DataSource dataSource) throws SQLException {
+        return dataSource.getConnection();
     }
 
     @Bean

@@ -11,4 +11,6 @@ public interface IPostService {
 
     Post getById(Long id);
 
+    void save(Post post);
+
 }
